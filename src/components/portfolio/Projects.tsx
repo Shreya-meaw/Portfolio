@@ -24,7 +24,7 @@ const Projects = () => {
       problemSolved: "Digitized manual ordering process, reducing order errors by 85% and improving customer satisfaction.",
       image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
       github: "https://github.com/shreya/spice-garden",
-      demo: "https://spicegarden-app.com"
+      demo: "https://stellular-twilight-0b29ee.netlify.app/"
     },
     {
       title: "AfriTech Portfolio Website",
@@ -34,7 +34,7 @@ const Projects = () => {
       problemSolved: "Created modern web presence that attracted 3 major investors and secured Series A funding.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
       github: "https://github.com/shreya/afritech-portfolio",
-      demo: "https://afritech-solutions.com"
+      demo: "https://edu-connect-inky.vercel.app/"
     }
   ];
 
@@ -73,7 +73,7 @@ const Projects = () => {
       company: "TechStart Inc.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
       github: "https://github.com/usergd26/waaa-web/tree/develop",
-      demo: "https://waaa-app-coral.vercel.app/"
+      demo: "https://www.waaa.in/"
     },
     {
       title: "EduLearn Learning Platform",
