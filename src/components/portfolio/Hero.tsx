@@ -143,7 +143,7 @@ const Hero = () => {
         asChild
       >
         <a
-          href="https://github.com/shreya"
+          href="https://github.com/Shreya-meaw"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub Profile"
