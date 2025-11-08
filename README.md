@@ -70,18 +70,18 @@ Portfolio site for African startup → helped raise Series A funding
 
 ## <img src="https://img.icons8.com/fluency/24/000000/combo-chart.png" width="20"/> GitHub Stats  
 
-![Shreya's GitHub stats](https://github-readme-stats.vercel.app/api?username=your-github-username&show_icons=true&theme=radical)  
+![Shreya's GitHub stats](https://github-readme-stats.vercel.app/api?username=Shreya-meaw&show_icons=true&theme=radical)  
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=your-github-username&layout=compact&theme=radical)  
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Shreya-meaw&layout=compact&theme=radical)  
 
 ---
 
 ## <img src="https://img.icons8.com/fluency/24/000000/contacts.png" width="20"/> Let’s Connect  
 
 - 📧 Email: [shreyasingh7297@gmail.com](mailto:shreyasingh7297@gmail.com)  
-- 💼 LinkedIn: [www.linkedin.com/in/shreya-singh-a14868303](#)  
-- 🐙 GitHub: [https://github.com/Shreya-meaw](#)  
-- 🌍 Portfolio: [(https://shreyaportfol.netlify.app/](#)  
+- 💼 LinkedIn: [www.linkedin.com/in/shreya-singh-a14868303](www.linkedin.com/in/shreya-singh-a14868303)  
+- 🐙 GitHub: [https://github.com/Shreya-meaw](https://github.com/Shreya-meaw)  
+- 🌍 Portfolio: [(https://shreyaportfolios.netlify.app/](https://shreyaportfolios.netlify.app)  
 
 ---
 
