@@ -2,18 +2,25 @@ import { motion } from "framer-motion";
 import { Download, MessageCircle, Github, Linkedin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Spline from '@splinetool/react-spline';
+import { useParallax } from "@/hooks/use-parallax";
+import { TextReveal } from "@/components/animations/TextReveal";
 
 
 const Hero = () => {
+  const parallaxOffset = useParallax(0.3);
+  
   return (
     <>
 
 <section 
   id="home" 
-  className="min-h-screen flex items-center relative overflow-hidden bg-background"
-> 
-{/* Spline Background (only visible on md and above) */}
-<div className="hidden md:block absolute inset-0 z-0 pointer-events-auto overflow-hidden">
+  className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-background via-background to-primary-muted/10"
+>
+{/* Spline Background with Parallax (only visible on md and above) */}
+<div 
+  className="hidden md:block absolute inset-0 z-0 pointer-events-auto overflow-hidden"
+  style={{ transform: `translateY(${parallaxOffset}px)` }}
+>
   <div className="w-full h-full scale-[1.20] translate-x-[50px]">
     <Spline scene="https://prod.spline.design/hZIuJ3e8IciqiLrP/scene.splinecode" />
   </div>
@@ -53,15 +60,15 @@ const Hero = () => {
 <div className="container mx-auto px-4 py-20 relative z-20 pointer-events-none">
     <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-<motion.div
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8 }}
-  // as="section"
-  id="hero"
-  itemScope
-  itemType="https://schema.org/Person"
->
+  <motion.div
+    initial={{ opacity: 0, x: -50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+    style={{ transform: `translateY(${-parallaxOffset * 0.2}px)` }}
+    id="hero"
+    itemScope
+    itemType="https://schema.org/Person"
+  >
   <motion.h1
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
@@ -97,33 +104,45 @@ const Hero = () => {
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.6, duration: 0.8 }}
+    transition={{ delay: 0.7, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     className="flex flex-col sm:flex-row gap-4 mb-8"
   >
     <div className="pointer-events-auto">
-      <Button
-        className="btn-gradient hover-lift hover-glow font-semibold"
-        size="lg"
-        onClick={() => window.open("https://docs.google.com/document/d/14fe4fa38hTpc0UFlq_M2Wx7mQhMpSVpp/edit?usp=sharing&ouid=117596840770019124674&rtpof=true&sd=true", "_blank")}
-        aria-label="View Resume of Shreya Singh"
+      <motion.div
+        whileHover={{ scale: 1.03, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <Download className="mr-2" size={20} />
-        View Resume
-      </Button>
+        <Button
+          className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl text-base font-semibold px-8 py-6 rounded-xl transition-all duration-300"
+          size="lg"
+          onClick={() => window.open("https://docs.google.com/document/d/14fe4fa38hTpc0UFlq_M2Wx7mQhMpSVpp/edit?usp=sharing&ouid=117596840770019124674&rtpof=true&sd=true", "_blank")}
+          aria-label="View Resume of Shreya Singh"
+        >
+          <Download className="mr-2" size={20} />
+          View Resume
+        </Button>
+      </motion.div>
     </div>
     <div className="pointer-events-auto">
-      <Button
-        variant="outline"
-        className="btn-ghost hover-lift hover-glow font-semibold border-2"
-        size="lg"
-        onClick={() =>
-          document.getElementById("hire")?.scrollIntoView({ behavior: "smooth" })
-        }
-        aria-label="Hire Shreya Singh"
+      <motion.div
+        whileHover={{ scale: 1.03, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <MessageCircle className="mr-2" size={20} />
-        Hire Me
-      </Button>
+        <Button
+          variant="outline"
+          className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-lg hover:shadow-xl text-base font-semibold px-8 py-6 rounded-xl transition-all duration-300"
+          size="lg"
+          onClick={() =>
+            document.getElementById("hire")?.scrollIntoView({ behavior: "smooth" })
+          }
+          aria-label="Hire Shreya Singh"
+        >
+          <MessageCircle className="mr-2" size={20} />
+          Hire Me
+        </Button>
+      </motion.div>
     </div>
   </motion.div>
 
@@ -131,63 +150,41 @@ const Hero = () => {
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.8, duration: 0.8 }}
-    className="flex gap-4"
+    transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="flex gap-3"
     aria-label="Social media links"
   >
-    <div className="pointer-events-auto">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="hover-scale hover-glow rounded-full bg-primary/10 hover:bg-primary/20"
-        asChild
-      >
-        <a
-          href="https://github.com/Shreya-meaw"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub Profile"
+    {[
+      { href: "https://github.com/Shreya-meaw", icon: Github, label: "GitHub Profile", bgClass: "bg-primary/10 hover:bg-primary" },
+      { href: "https://www.linkedin.com/in/shreya-singh-a14868303", icon: Linkedin, label: "LinkedIn Profile", bgClass: "bg-accent/10 hover:bg-accent" },
+      { href: "https://wa.me/+918279948895", icon: Phone, label: "WhatsApp Contact", bgClass: "bg-primary/10 hover:bg-primary" }
+    ].map((social, index) => (
+      <div key={social.label} className="pointer-events-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1 + index * 0.1, type: "spring", stiffness: 300 }}
+          whileHover={{ scale: 1.15, y: -3 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <Github size={24} />
-        </a>
-      </Button>
-    </div>
-
-    <div className="pointer-events-auto">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="hover-scale hover-glow rounded-full bg-secondary/10 hover:bg-secondary/20"
-        asChild
-      >
-        <a
-          href="https://www.linkedin.com/in/shreya-singh-a14868303"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn Profile"
-        >
-          <Linkedin size={24} />
-        </a>
-      </Button>
-    </div>
-
-    <div className="pointer-events-auto">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="hover-scale hover-glow rounded-full bg-primary/10 hover:bg-primary/20"
-        asChild
-      >
-        <a
-          href="https://wa.me/+918279948895"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp Contact"
-        >
-          <Phone size={24} />
-        </a>
-      </Button>
-    </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className={`rounded-full ${social.bgClass} hover:text-white shadow-md hover:shadow-lg transition-all duration-300 w-12 h-12`}
+            asChild
+          >
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+            >
+              <social.icon size={22} />
+            </a>
+          </Button>
+        </motion.div>
+      </div>
+    ))}
   </motion.div>
 </motion.div>
 

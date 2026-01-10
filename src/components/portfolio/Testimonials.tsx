@@ -91,28 +91,37 @@ const Testimonials = () => {
         </svg>
       </div>
 
-      <section id="testimonials" className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
+      <section id="testimonials" className="py-20 relative overflow-hidden bg-gradient-to-b from-muted/20 via-background to-muted/20" aria-labelledby="testimonials-heading">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" aria-hidden="true" />
+        <div className="absolute top-40 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.header
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Client Reviews</h2>
+            <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Client Reviews
+            </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               What my clients say about working with me
             </p>
-          </motion.div>
+          </motion.header>
 
           <div className="max-w-4xl mx-auto">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              exit={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+              transition={{ 
+                duration: 0.6,
+                type: "spring",
+                stiffness: 100
+              }}
               className="relative mb-12"
             >
               <Lottie
@@ -122,7 +131,7 @@ const Testimonials = () => {
                 className="absolute inset-0 w-full h-full z-0 opacity-30 pointer-events-none"
               />
 
-              <Card className="shadow-glow">
+              <Card className="shadow-glow hover:shadow-hover transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8 md:p-12">
                   <Quote className="text-primary mb-6" size={48} />
 
@@ -140,7 +149,7 @@ const Testimonials = () => {
                     <div className="flex items-center justify-center space-x-4">
                       <img
                         src={currentTestimonial.avatar}
-                        alt={currentTestimonial.name}
+                        alt={`${currentTestimonial.name} - ${currentTestimonial.role} at ${currentTestimonial.company}`}
                         className="w-16 h-16 rounded-full object-cover"
                       />
                       <div>

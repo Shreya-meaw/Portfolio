@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Check, Calendar, CreditCard } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const Pricing = () => {
-  const [exchangeRate, setExchangeRate] = useState(null);
-  const [currency, setCurrency] = useState("USD"); // "USD" or "INR"
-  const [loadingRate, setLoadingRate] = useState(true);
+  const { currency, toggleCurrency, formatPrice } = useCurrency();
 
   const packages = [
     {
@@ -63,80 +62,20 @@ const Pricing = () => {
     },
   ];
 
-  useEffect(() => {
-    const fetchRate = async () => {
-      try {
-        const res = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await res.json();
-        if (data && data.result === "success" && data.rates && data.rates.INR) {
-          console.log("Exchange rate fetched:", data.rates.INR);
-          setExchangeRate(data.rates.INR);
-        } else {
-          console.warn("Invalid exchange rate data", data);
-        }
-      } catch (error) {
-        console.error("Error fetching exchange rate", error);
-      } finally {
-        setLoadingRate(false);
-      }
-    };
-    fetchRate();
-  }, []);
-
-  // Parse price string like "$150 – $250" or "$450 – $850"
-  const parsePriceRange = (priceStr) => {
-    if (!priceStr || priceStr.toLowerCase().includes("startup")) return null;
-
-    // Match two numbers separated by any non-digit chars (dash, space, etc)
-    const match = priceStr.match(/(\d+)[^\d]+(\d+)/);
-    if (match) {
-      const min = Number(match[1]);
-      const max = Number(match[2]);
-      if (!isNaN(min) && !isNaN(max)) return [min, max];
-    }
-
-    // If no range, try single number
-    const singleMatch = priceStr.match(/(\d+)/);
-    if (singleMatch) {
-      const val = Number(singleMatch[1]);
-      if (!isNaN(val)) return [val, val];
-    }
-
-    return null;
-  };
-
-  const formatPrice = (priceStr) => {
-    if (!priceStr) return "Startup Collaboration";
-    if (currency === "USD") return priceStr;
-
-    if (loadingRate) return "Loading...";
-    if (!exchangeRate) return "Rate unavailable";
-
-    const range = parsePriceRange(priceStr);
-    if (!range) return priceStr;
-
-    const [min, max] = range;
-    const minINR = Math.round(min * exchangeRate);
-    const maxINR = Math.round(max * exchangeRate);
-
-    if (minINR === maxINR) return `₹${minINR.toLocaleString()}`;
-    return `₹${minINR.toLocaleString()} – ₹${maxINR.toLocaleString()}`;
-  };
-
   return (
     <>
      
 
-      <section id="pricing" className="py-20 bg-muted/30">
+      <section id="pricing" className="py-20 bg-muted/30" aria-labelledby="pricing-heading">
         <div className="container mx-auto px-4">
-          <motion.div
+          <motion.header
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Transparent Pricing</h2>
+            <h2 id="pricing-heading" className="text-4xl font-bold mb-4">Transparent Pricing</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
               Choose the perfect package for your project needs
             </p>
@@ -150,9 +89,9 @@ const Pricing = () => {
                 Limited Slots Available
               </Badge>
             </div>
-          </motion.div>
+          </motion.header>
            <div className="text-center mb-8">
-        <Button onClick={() => setCurrency(currency === "USD" ? "INR" : "USD")}>
+        <Button onClick={toggleCurrency}>
           Switch to {currency === "USD" ? "INR" : "USD"}
         </Button>
       </div>
@@ -161,10 +100,16 @@ const Pricing = () => {
             {packages.map((pkg, index) => (
               <motion.div
                 key={pkg.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100 
+                }}
                 viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className="relative"
               >
                 {pkg.popular && (
@@ -199,7 +144,12 @@ const Pricing = () => {
                           key={feature}
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: featureIndex * 0.05 }}
+                          transition={{ 
+                            duration: 0.5, 
+                            delay: index * 0.15 + featureIndex * 0.05,
+                            type: "spring",
+                            stiffness: 120
+                          }}
                           viewport={{ once: true }}
                           className="flex items-start space-x-3"
                         >

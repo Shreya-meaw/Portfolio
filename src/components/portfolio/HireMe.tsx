@@ -19,6 +19,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+import { trackHireMeSubmit } from "@/lib/analytics";
 
 const HireMe = () => {
   const [formData, setFormData] = useState({
@@ -44,24 +46,55 @@ const HireMe = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // EmailJS configuration
+      const serviceId = "service_jpcfqwq";
+      const templateId = "template_v8v2s1q";
+      const publicKey = "3MsZiINnL93VyOBvG";
 
-    toast({
-      title: "Application Submitted!",
-      description:
-        "Thank you for your interest. I’ll get back to you within 24 hours.",
-    });
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.fullName,
+        company_name: formData.companyName,
+        role: formData.role,
+        from_email: formData.email,
+        phone: formData.phone || "Not provided",
+        start_date: formData.startDate,
+        message: formData.message || "No additional message",
+        to_email: "shreyasingh7297@gmail.com"
+      };
 
-    setFormData({
-      fullName: "",
-      companyName: "",
-      role: "",
-      email: "",
-      phone: "",
-      startDate: "",
-      message: "",
-    });
-    setIsSubmitting(false);
+      // Send email via EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      // Track conversion
+      trackHireMeSubmit();
+
+      toast({
+        title: "Application Submitted!",
+        description:
+          "Thank you for your interest. I'll get back to you within 24 hours.",
+      });
+
+      setFormData({
+        fullName: "",
+        companyName: "",
+        role: "",
+        email: "",
+        phone: "",
+        startDate: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your message. Please try again or contact directly at shreyasingh7297@gmail.com",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -85,28 +118,29 @@ const HireMe = () => {
       <section
         id="hire"
         className="py-20 bg-gradient-to-b from-muted/30 to-background relative"
+        aria-labelledby="hire-heading"
       >
         <div className="container mx-auto px-4">
           {/* Header Section */}
-          <motion.div
+          <motion.header
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl font-bold mb-4">
+            <h2 id="hire-heading" className="text-4xl font-bold mb-4">
               Hire a{" "}
               <span className="text-primary">Frontend Developer</span> &{" "}
               <span className="text-secondary">React.js Expert</span>
-            </h1>
+            </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Looking for{" "}
               <strong>Next.js / React.js Developer</strong> who delivers{" "}
-              <em>fast, scalable, and SEO-optimized websites</em>? Let’s
+              <em>fast, scalable, and SEO-optimized websites</em>? Let's
               collaborate and bring your ideas to life.
             </p>
-          </motion.div>
+          </motion.header>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
@@ -279,9 +313,9 @@ const HireMe = () => {
               {/* Why Hire Me */}
               <Card className="gradient-card shadow-lg hover:shadow-xl transition">
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-6">
+                  <h3 className="text-2xl font-bold mb-6">
                     Why Hire Me as Your Developer?
-                  </h2>
+                  </h3>
                   <ul className="space-y-4 text-muted-foreground">
                     <li className="flex items-center gap-2">
                       <Zap size={18} className="text-primary" aria-hidden />
@@ -332,7 +366,7 @@ const HireMe = () => {
                 <CardContent className="p-8">
                   <div className="flex items-center mb-4">
                     <Calendar className="mr-2 text-primary" size={20} />
-                    <h2 className="text-xl font-bold">Availability</h2>
+                    <h3 className="text-xl font-bold">Availability</h3>
                   </div>
                   <div className="space-y-2 text-sm">
                     <p>

@@ -7,65 +7,173 @@ All colors MUST be HSL. This palette is designed for a modern yet timeless feel.
 */
 
 @layer base {
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
   :root {
     /* Background System */
-    --background: 210 20% 98%;        /* Porcelain White #F8F9FA */
-    --foreground: 0 0% 17%;           /* Deep Charcoal #2C2C2C */
+    --background: 0 0% 98%;            /* Porcelain White #F8F9FA */
+    --foreground: 0 0% 17%;            /* Deep Charcoal #2C2C2C */
 
     /* Card System */
-    --card: 0 0% 100%;                /* White #FFFFFF */
-    --card-foreground: 0 0% 17%;      /* Deep Charcoal #2C2C2C */
+    --card: 0 0% 100%;                 /* White #FFFFFF */
+    --card-foreground: 0 0% 17%;       /* Deep Charcoal #2C2C2C */
 
     /* Primary System - Steel Teal */
-    --primary: 180 30% 40%;           /* Steel Teal #468189 */
-    --primary-foreground: 0 0% 100%;  /* White #FFFFFF */
-    --primary-glow: 180 30% 50%;      /* Lighter Steel Teal */
-    --primary-muted: 180 30% 90%;     /* Very Light Steel Teal */
+    --primary: 187 32% 41%;            /* Steel Teal #468189 */
+    --primary-foreground: 0 0% 100%;   /* White #FFFFFF */
+    --primary-glow: 187 32% 55%;       /* Lighter Steel Teal */
+    --primary-muted: 187 32% 92%;      /* Very Light Steel Teal */
+    --primary-dark: 187 32% 30%;       /* Darker Steel Teal */
 
     /* Accent System - Muted Rose Gold */
-    --accent: 0 20% 80%;               /* Muted Rose Gold #D6A4A4 */
+    --accent: 0 23% 74%;               /* Muted Rose Gold #D6A4A4 */
     --accent-foreground: 0 0% 100%;    /* White #FFFFFF */
+    --accent-light: 35 45% 89%;        /* Champagne Cream #F5EBDD */
+    --accent-glow: 0 23% 85%;          /* Lighter Rose Gold */
 
-    /* Secondary Text */
-    --secondary: 0 0% 44%;            /* Stone Gray #707070 */
+    /* Secondary System */
+    --secondary: 0 0% 44%;             /* Stone Gray #707070 */
     --secondary-foreground: 0 0% 100%; /* White #FFFFFF */
+    --secondary-muted: 0 0% 94%;       /* Light Gray */
+
+    /* Muted Colors */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 44%;
+
+    /* Border */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 187 32% 41%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
 
     /* Footer Background */
-    --footer-background: 210 20% 10%;  /* Ink Blue #1C1F2A */
-    --footer-foreground: 0 0% 90%;     /* Champagne Cream #F5EBDD */
+    --footer-background: 217 25% 12%;  /* Ink Blue #1C1F2A */
+    --footer-foreground: 35 45% 89%;   /* Champagne Cream #F5EBDD */
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.2);
-    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.4);
-    --shadow-card: 0 8px 25px -5px hsl(var(--foreground) / 0.1);
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(187 32% 41%), hsl(187 32% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(0 23% 74%), hsl(35 45% 89%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(187 32% 41% / 0.1), hsl(0 23% 74% / 0.1));
 
-    /* Animation Variables */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Shadows - Enhanced */
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1);
+    --shadow-soft: 0 8px 30px -5px hsl(187 32% 41% / 0.15);
+    --shadow-glow: 0 0 40px hsl(187 32% 55% / 0.3);
+    --shadow-card: 0 8px 25px -5px hsl(0 0% 0% / 0.08);
+    --shadow-hover: 0 20px 40px -10px hsl(187 32% 41% / 0.25);
+
+    /* Animation Variables - Enhanced for smoother feel */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-fast: all 0.2s ease-out;
+    --transition-ultra: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
     --radius: 1rem;
+  }
 
-    --sidebar-background: 210 20% 10%; /* Ink Blue #1C1F2A */
-    --sidebar-foreground: 0 0% 90%;    /* Champagne Cream #F5EBDD */
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes bounce-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4);
+    }
+  }
+
+  @keyframes word-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    --sidebar-background: 217 25% 12%;
+    --sidebar-foreground: 35 45% 89%;
   }
 
   .dark {
-    /* Dark Mode */
-    --background: 210 20% 10%;        /* Dark Ink Blue */
-    --foreground: 0 0% 90%;           /* Champagne Cream #F5EBDD */
+    /* Dark Mode - Enhanced */
+    --background: 217 25% 12%;         /* Dark Ink Blue */
+    --foreground: 35 45% 89%;          /* Champagne Cream #F5EBDD */
 
     --card: 0 0% 17%;                  /* Deep Charcoal #2C2C2C */
-    --card-foreground: 0 0% 90%;       /* Champagne Cream #F5EBDD */
+    --card-foreground: 35 45% 89%;     /* Champagne Cream #F5EBDD */
 
-    --primary: 180 30% 50%;            /* Lighter Steel Teal */
-    --primary-foreground: 210 20% 10%; /* Dark Ink Blue */
+    --primary: 187 32% 55%;            /* Lighter Steel Teal */
+    --primary-foreground: 217 25% 12%; /* Dark Ink Blue */
+    --primary-glow: 187 32% 65%;
+    --primary-muted: 187 32% 25%;
     
-    --accent: 0 20% 70%;               /* Lighter Muted Rose Gold */
-    --accent-foreground: 0 0% 90%;     /* Champagne Cream #F5EBDD */
+    --accent: 0 23% 70%;               /* Lighter Muted Rose Gold */
+    --accent-foreground: 217 25% 12%;
+    --accent-light: 35 45% 25%;
+    --accent-glow: 0 23% 80%;
 
-    /* Dark Mode Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.2);
-    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.4);
+    --secondary: 0 0% 60%;
+    --secondary-foreground: 217 25% 12%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+
+    --popover: 0 0% 17%;
+    --popover-foreground: 35 45% 89%;
+
+    /* Dark Mode Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(187 32% 45%), hsl(187 32% 65%));
+    --gradient-accent: linear-gradient(135deg, hsl(0 23% 60%), hsl(35 45% 70%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 17%), hsl(217 25% 12%));
+    --gradient-hero: linear-gradient(135deg, hsl(187 32% 45% / 0.15), hsl(0 23% 60% / 0.15));
+
+    /* Dark Mode Shadows - Enhanced */
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.5);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6);
+    --shadow-soft: 0 8px 30px -5px hsl(187 32% 55% / 0.25);
+    --shadow-glow: 0 0 50px hsl(187 32% 65% / 0.4);
+    --shadow-card: 0 8px 25px -5px hsl(0 0% 0% / 0.3);
+    --shadow-hover: 0 20px 40px -10px hsl(187 32% 55% / 0.4);
   }
 }
 
@@ -196,34 +304,148 @@ All colors MUST be HSL. This palette is designed for a modern yet timeless feel.
 
   /* Enhanced Hover animations */
   .hover-lift {
-    transition: var(--transition-smooth);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
   }
   
   .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
   }
 
   .hover-scale {
-    transition: var(--transition-smooth);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
   }
   
   .hover-scale:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 
+  .hover-glow {
+    transition: box-shadow 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
+  }
+  
   .hover-glow:hover {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-3px);
+  }
+
+  .hover-tilt {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+  }
+  
+  .hover-tilt:hover {
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg) scale(1.03);
   }
 
   .hover-float:hover {
-    animation: float 0.3s ease-out;
+    animation: float 0.4s ease-out;
+  }
+  
+  /* New smooth interactions */
+  .interactive-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    will-change: transform, box-shadow;
+  }
+  
+  .interactive-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 25px 50px -12px hsl(var(--primary) / 0.2);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+  
+  .interactive-button {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.25s ease;
+    will-change: transform;
+  }
+  
+  .interactive-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .interactive-button:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .scroll-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+  }
+
+  /* Text gradient effects */
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Smooth button effects */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium;
+    @apply hover:bg-primary-glow transition-smooth hover:shadow-glow;
+    @apply active:scale-95;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium;
+    @apply hover:bg-accent-glow transition-smooth hover:shadow-soft;
+    @apply active:scale-95;
   }
 
   /* Button variants */
@@ -252,6 +474,67 @@ All colors MUST be HSL. This palette is designed for a modern yet timeless feel.
     color: hsl(var(--primary-foreground));
     transform: translateY(-2px);
   }
+
+  /* Card effects */
+  .card-elegant {
+    @apply bg-card rounded-xl shadow-card border border-border/50;
+    @apply hover:shadow-hover transition-smooth;
+  }
+
+  .card-glass {
+    @apply backdrop-blur-lg bg-card/80 rounded-xl border border-border/30;
+    @apply shadow-soft hover:shadow-glow transition-smooth;
+  }
+
+  /* Link underline animation */
+  .link-animated {
+    @apply relative inline-block;
+  }
+  
+  .link-animated::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary;
+    @apply origin-bottom-right scale-x-0 transition-transform duration-300;
+  }
+  
+  .link-animated:hover::after {
+    @apply origin-bottom-left scale-x-100;
+  }
+
+  /* Pulse glow animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
 }
 
 @layer base {
@@ -264,5 +547,49 @@ All colors MUST be HSL. This palette is designed for a modern yet timeless feel.
   .no-scroll {
     overflow: hidden;
     height: 100vh;
+  }
+
+  /* Ripple effect */
+  .ripple-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .ripple-effect:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    transition: width 0.6s, height 0.6s, opacity 0.6s;
+  }
+
+  /* Button micro-interactions */
+  .btn-bounce:active {
+    animation: bounce-subtle 0.3s ease;
+  }
+
+  .btn-glow:active {
+    animation: glow-pulse 0.5s ease;
+  }
+
+  /* Card interactions */
+  .card-interactive {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-interactive:active {
+    transform: scale(0.98);
   }
 }

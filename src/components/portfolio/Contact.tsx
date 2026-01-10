@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { trackSocialClick, trackContactSubmit } from "@/lib/analytics";
 
 const Contact = () => {
   const contactMethods = [
@@ -24,8 +25,8 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Location",
-      value: "India (Available Globally)",
-      href: "#",
+      value: "India – Available Globally",
+      href: "https://www.google.com/maps?q=Dehradun+248003+Uttarakhand+India",
       color: "text-purple-500"
     }
   ];
@@ -55,17 +56,20 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-muted/30 to-background">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 bg-gradient-to-b from-muted/30 via-background to-muted/10 relative overflow-hidden" aria-labelledby="contact-heading">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" aria-hidden="true" />
+      <div className="absolute top-20 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute bottom-20 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="container mx-auto px-4 relative z-10">
         {/* Heading */}
-        <motion.div
+        <motion.header
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-extrabold tracking-tight mb-4">
+          <h2 id="contact-heading" className="text-4xl font-extrabold tracking-tight mb-4">
             Let’s Connect
           </h2>
          <p className="text-lg text-muted-foreground max-w-2xl mx-auto flex items-center justify-center gap-2">
@@ -75,7 +79,7 @@ const Contact = () => {
   {/* <MessageCircle className="text-primary w-5 h-5" aria-hidden="true" /> */}
 </p>
 
-        </motion.div>
+        </motion.header>
 
         <div className="max-w-5xl mx-auto">
           {/* Contact Methods */}
@@ -83,13 +87,20 @@ const Contact = () => {
             {contactMethods.map((method, index) => (
               <motion.div
                 key={method.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100
+                }}
                 viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.05 }}
               >
-                <Card className="bg-card/70 backdrop-blur-md border border-border/40 rounded-2xl shadow-lg hover:shadow-xl transition-all group">
-                  <CardContent className="p-8 text-center">
+                <Card className="bg-gradient-to-br from-card via-card to-primary/5 backdrop-blur-md border border-primary/20 rounded-2xl shadow-card hover:shadow-hover transition-all duration-500 group hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                  <CardContent className="p-8 text-center relative z-10">
                     <method.icon
                       className={`mx-auto mb-4 ${method.color} group-hover:scale-110 transition-transform`}
                       size={48}
@@ -99,7 +110,10 @@ const Contact = () => {
                     <Button
                       variant="outline"
                       className="rounded-full px-6 hover:scale-105 transition-all"
-                      onClick={() => window.open(method.href, "_blank")}
+                      onClick={() => {
+                        trackContactSubmit();
+                        window.open(method.href, "_blank");
+                      }}
                     >
                       Get in Touch
                     </Button>
@@ -122,16 +136,25 @@ const Contact = () => {
               {socialLinks.map((social, index) => (
                 <motion.div
                   key={social.title}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 120
+                  }}
                   viewport={{ once: true }}
+                  whileHover={{ scale: 1.2, rotate: 5 }}
                 >
                   <Button
                     variant="outline"
                     size="icon"
                     className="w-16 h-16 rounded-full hover:scale-110 hover:shadow-md transition-all group"
-                    onClick={() => window.open(social.href, "_blank")}
+                    onClick={() => {
+                      trackSocialClick(social.title);
+                      window.open(social.href, "_blank");
+                    }}
                   >
                     <social.icon
                       className={`${social.color} group-hover:scale-110 transition-transform`}

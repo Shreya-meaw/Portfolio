@@ -4,22 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
-        default: "bg-[#468189] text-white hover:bg-[#D6A4A4]", // Steel Teal and Muted Rose Gold
-        destructive: "bg-red-600 text-white hover:bg-red-700", // Example for destructive
-        outline: "border border-[#468189] bg-transparent text-[#468189] hover:bg-[#D6A4A4] hover:text-white", // Steel Teal and Muted Rose Gold
-        secondary: "bg-[#D6A4A4] text-white hover:bg-[#F5EBDD]", // Muted Rose Gold and Champagne Cream
-        ghost: "hover:bg-[#D6A4A4] hover:text-[#2C2C2C]", // Muted Rose Gold and Deep Charcoal
-        link: "text-[#468189] underline-offset-4 hover:underline", // Steel Teal
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm hover:shadow-md",
+        outline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md",
+        secondary: "bg-accent text-accent-foreground hover:bg-accent/80 shadow-sm hover:shadow-md",
+        ghost: "hover:bg-muted hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-10 px-5 py-2",
+        sm: "h-9 rounded-lg px-4 text-xs",
+        lg: "h-12 rounded-xl px-8 text-base",
+        icon: "h-10 w-10 rounded-full",
       },
     },
     defaultVariants: {

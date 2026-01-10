@@ -1,103 +1,135 @@
 import { motion } from "framer-motion";
-import { 
-  Code, 
-  Database, 
-  Globe, 
-  Server, 
-  Smartphone, 
-  Cloud,
-  Shield,
-  Palette,
-  GitBranch,
-  Zap
-} from "lucide-react";
+import { Code, Database, Server, Cloud, Zap, Palette } from "lucide-react";
 
 const TechStack = () => {
-  const techCategories = [
+  const skills = [
     {
-      title: "Frontend",
+      category: "Frontend Development",
       icon: Code,
-      color: "text-primary",
-      technologies: ["React.js/ Next.js (App Router, Hooks, Context)", "HTML5", "CSS3", "Tailwind CSS", "JavaScript", "TypeScript","UI/UX",]
+      skills: [
+        { name: "React.js / Next.js", level: 95 },
+        { name: "TypeScript", level: 90 },
+        { name: "JavaScript (ES6+)", level: 95 },
+        { name: "HTML5 & CSS3", level: 98 },
+        { name: "Tailwind CSS", level: 92 },
+        { name: "UI/UX Design", level: 85 },
+      ],
     },
     {
-      title: "2D/3D", 
-      icon: Server,
-      color: "text-secondary",
-      technologies: ["Three.js", "React Three Fiber", "Charts", "dashboards", "interactive visualizations"]
+      category: "3D & Visualization",
+      icon: Palette,
+      skills: [
+        { name: "Three.js", level: 80 },
+        { name: "React Three Fiber", level: 75 },
+        { name: "Charts & Dashboards", level: 88 },
+        { name: "Interactive Visualizations", level: 85 },
+      ],
     },
     {
-      title: "Database",
+      category: "Backend & Database",
       icon: Database,
-      color: "text-primary",
-      technologies: ["MongoDB", "MySQL", "PostgreSQL", "Firebase", "Redis"]
+      skills: [
+        { name: "MongoDB", level: 85 },
+        { name: "PostgreSQL", level: 80 },
+        { name: "MySQL", level: 82 },
+        { name: "Firebase", level: 78 },
+        { name: "Redis", level: 70 },
+      ],
     },
     {
-      title: "Architecture & System Design",
-      icon: Smartphone,
-      color: "text-secondary", 
-      technologies: ["Component-driven architecture", "Reusable UI systems", "Large-scale project structuring","scalable folders"]
+      category: "Architecture & System Design",
+      icon: Server,
+      skills: [
+        { name: "Component-Driven Architecture", level: 92 },
+        { name: "Reusable UI Systems", level: 90 },
+        { name: "Scalable Folder Structure", level: 88 },
+        { name: "Design Patterns", level: 85 },
+      ],
     },
     {
-      title: "Cross-Skill Edge",
-      icon: Cloud,
-      color: "text-primary",
-      technologies: ["AI integrations in frontend", "Security in frontend (XSS prevention, JWT handling)", "Mentoring juniors", "reviewing code", "Tech stack planning","collaboration with backend/devops/design teams"]
-    },
-    {
-      title: "Tools & Others",
+      category: "DevOps & Tools",
       icon: Zap,
-      color: "text-secondary",
-      technologies: ["Git & GitHub (branching, PR reviews)", "CI/CD basics", "Linting & formatting", "Unit & integration testing basics", "Figma & VS Code","Postman for API testing"]
-    }
+      skills: [
+        { name: "Git & GitHub", level: 95 },
+        { name: "CI/CD", level: 75 },
+        { name: "Testing (Unit & Integration)", level: 80 },
+        { name: "Figma", level: 85 },
+      ],
+    },
+    {
+      category: "Additional Skills",
+      icon: Cloud,
+      skills: [
+        { name: "AI Integration", level: 82 },
+        { name: "Security Best Practices", level: 85 },
+        { name: "Code Review & Mentoring", level: 88 },
+        { name: "API Design", level: 83 },
+      ],
+    },
   ];
 
   return (
-    <section id="tech-stack" className="py-20 bg-muted/20">
+    <section id="tech-stack" className="py-20 bg-muted/20" aria-labelledby="tech-stack-heading">
       <div className="container mx-auto px-4">
-        <motion.div
+        <motion.header
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Tech Stack & Tools</h2>
+          <h2 id="tech-stack-heading" className="text-4xl font-bold mb-4">Skills & Expertise</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Technologies I use to build amazing digital experiences
+            My proficiency levels across different technologies and domains
           </p>
-        </motion.div>
+        </motion.header>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {techCategories.map((category, index) => (
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {skills.map((category, categoryIndex) => (
             <motion.div
-              key={category.title}
+              key={category.category}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="bg-card rounded-2xl p-6 shadow-card hover-lift transition-smooth border"
+              className="bg-card rounded-2xl p-6 shadow-card border"
             >
               <div className="flex items-center mb-6">
-                <div className={`p-3 rounded-full bg-muted ${category.color}`}>
-                  <category.icon size={24} />
+                <div className="p-3 rounded-full bg-primary/10">
+                  <category.icon className="text-primary" size={24} />
                 </div>
-                <h3 className="text-xl font-semibold ml-4">{category.title}</h3>
+                <h3 className="text-xl font-semibold ml-4">{category.category}</h3>
               </div>
-              
-              <div className="space-y-2">
-                {category.technologies.map((tech, techIndex) => (
-                  <motion.div
-                    key={tech}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: (index * 0.1) + (techIndex * 0.05) }}
-                    viewport={{ once: true }}
-                    className="flex items-center"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-primary mr-3"></div>
-                    <span className="text-sm text-muted-foreground">{tech}</span>
-                  </motion.div>
+
+              <div className="space-y-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <div key={skill.name}>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm font-medium">{skill.name}</span>
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
+                        viewport={{ once: true }}
+                        className="text-sm text-muted-foreground"
+                      >
+                        {skill.level}%
+                      </motion.span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        transition={{
+                          duration: 1,
+                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                          ease: "easeOut",
+                        }}
+                        viewport={{ once: true }}
+                        className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>

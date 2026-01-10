@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Users, Clock, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { TextReveal } from "@/components/animations/TextReveal";
 
 const About = () => {
   const techStack = [
@@ -51,8 +52,11 @@ const About = () => {
         </svg>
       </div>
 
-      <section id="about" className="py-20">
-        <div className="container mx-auto px-4">
+      <section id="about" className="py-20 relative overflow-hidden" aria-labelledby="about-heading">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" aria-hidden="true" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Photo Section */}
 <motion.div
@@ -63,19 +67,19 @@ const About = () => {
   className="relative lg:order-1"
 >
   <div className="relative w-80 h-80 mx-auto">
-    <div className="w-full h-full rounded-full overflow-hidden shadow-glow border-4 border-primary/20 relative">
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={images[currentIndex]}
-          src={images[currentIndex]}
-          alt={`Carousel image ${currentIndex + 1}`}
-          className="w-full h-full object-cover absolute top-0 left-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        />
-      </AnimatePresence>
+    <div className="w-full h-full rounded-full overflow-hidden shadow-hover border-4 border-primary/30 relative bg-gradient-to-br from-primary/10 to-accent/10 p-1">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={images[currentIndex]}
+              src={images[currentIndex]}
+              alt={`Shreya Singh professional portrait - Frontend Developer and Freelancer based in Dehradun, India`}
+              className="w-full h-full object-cover absolute top-0 left-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            />
+          </AnimatePresence>
     </div>
 
     {/* Dots navigation */}
@@ -142,24 +146,18 @@ const About = () => {
               viewport={{ once: true }}
               className="lg:order-2"
             >
-              <h2 className="text-4xl font-bold mb-6">About Me</h2>
+              <h2 id="about-heading" className="text-4xl font-bold mb-6">
+                <TextReveal text="About Me" as="span" />
+              </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p className="text-lg">
-                  Hi! I'm <span className="text-primary font-semibold">Shreya Singh</span>, a passionate full-stack developer with over a year of experience 
-                  in creating beautiful, functional websites and applications. My journey started with 
-                  curiosity about how websites work, and now I'm delivering projects for clients globally.
+                  <TextReveal text="Hi! I'm Shreya Singh, a passionate full-stack developer with over a year of experience in creating beautiful, functional websites and applications. My journey started with curiosity about how websites work, and now I'm delivering projects for clients globally." delay={0.1} />
                 </p>
                 <p>
-                  I specialize in modern web technologies like <span className="text-secondary font-medium">React.js</span>, 
-                  <span className="text-primary font-medium"> Node.js</span>, and <span className="text-secondary font-medium">MongoDB</span>. 
-                  My approach combines technical expertise with a deep understanding of user experience 
-                  to create solutions that not only work flawlessly but also delight users.
+                  <TextReveal text="I specialize in modern web technologies like React.js, Node.js, and MongoDB. My approach combines technical expertise with a deep understanding of user experience to create solutions that not only work flawlessly but also delight users." delay={0.2} />
                 </p>
                 <p>
-                  <span className="text-primary font-medium">I love solving tough UI challenges and creating joyful digital experiences.</span> 
-                  When I'm not coding, I'm learning new technologies, contributing to open-source projects, 
-                  or planning my next exciting project. I believe in continuous learning and staying 
-                  updated with the latest industry trends.
+                  <TextReveal text="I love solving tough UI challenges and creating joyful digital experiences. When I'm not coding, I'm learning new technologies, contributing to open-source projects, or planning my next exciting project. I believe in continuous learning and staying updated with the latest industry trends." delay={0.3} />
                 </p>
               </div>
 
