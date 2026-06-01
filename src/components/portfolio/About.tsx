@@ -38,6 +38,7 @@ const About = () => {
   return (
     <>
       {/* SVG Wave Divider */}
+      {/*
       <div className="w-full overflow-hidden leading-[0] relative -mt-1">
         <svg
           className="w-full h-[50px] md:h-[60px]"
@@ -51,6 +52,8 @@ const About = () => {
           />
         </svg>
       </div>
+
+      */}
 
       <section id="about" className="py-20 relative overflow-hidden" aria-labelledby="about-heading">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" aria-hidden="true" />

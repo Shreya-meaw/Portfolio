@@ -8,10 +8,11 @@ export const navItems: NavItem[] = [
   { href: "#services", label: "Services" },
   { href: "#about", label: "About Me" },
   { href: "#projects", label: "Highlights" },
-  { href: "#testimonials", label: "Reviews" },
-  { href: "#pricing", label: "Pricing" },
+  // { href: "#testimonials", label: "Reviews" },
+
+  // { href: "#pricing", label: "Pricing" },
   { href: "#blog", label: "Blog" },
-  { href: "#hire", label: "Hire Me" },
+  // { href: "#hire", label: "Hire Me" },
 ];
 
 export const footerQuickLinks: NavItem[] = [
@@ -19,8 +20,8 @@ export const footerQuickLinks: NavItem[] = [
   { href: "#services", label: "Our Services" },
   { href: "#about", label: "About Me" },
   { href: "#projects", label: "Highlights" },
-  { href: "#testimonials", label: "Client Reviews" },
-  { href: "#pricing", label: "Pricing Plans" },
-  { href: "#hire", label: "Hire Me" },
+  // { href: "#testimonials", label: "Client Reviews" },
+  // { href: "#pricing", label: "Pricing Plans" },
+  // { href: "#hire", label: "Hire Me" },
   { href: "#blog", label: "Blog" },
 ];

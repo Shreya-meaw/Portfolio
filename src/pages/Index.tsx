@@ -2,13 +2,29 @@ import { ThemeProvider } from "next-themes";
 import { motion } from "framer-motion";
 import Header from "@/components/portfolio/Header";
 import Hero from "@/components/portfolio/Hero";
+
+
+{/*
 import Services from "@/components/portfolio/Services";
+*/}
+
 import About from "@/components/portfolio/About";
 import TechStack from "@/components/portfolio/TechStack";
 import ProjectHighlights from "@/components/portfolio/ProjectHighlights";
+
+{/*
 import Testimonials from "@/components/portfolio/Testimonials";
+*/}
+
+
+{/*
 import Pricing from "@/components/portfolio/Pricing";
+*/}
+
+{/*
 import HireMe from "@/components/portfolio/HireMe";
+*/}
+
 import Contact from "@/components/portfolio/Contact";
 import Stats from "@/components/portfolio/Stats";
 import Footer from "@/components/portfolio/Footer";
@@ -27,15 +43,28 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+         {/*
           <Services />
+          */}
+
           <About />
           <TechStack />
           <ProjectHighlights />
+
+          {/*
           <Testimonials />
+*/}
+
+          {/*
           <Pricing />
+            */}
+
+
           <Stats />
           <Blog />
-          <HireMe />
+
+
+          {/* <HireMe /> */}
           <Contact />
         </main>
         <Footer />
