@@ -11,7 +11,7 @@ const About = () => {
     { name: "MongoDB", level: 80, color: "bg-primary" },
     { name: "HTML/CSS", level: 95, color: "bg-secondary" },
     { name: "JavaScript", level: 90, color: "bg-primary" },
-    { name: "Express.js", level: 85, color: "bg-secondary" }
+    { name: "UI/UX", level: 85, color: "bg-secondary" }
   ];
 
   const softSkills = [
@@ -154,10 +154,10 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p className="text-lg">
-                  <TextReveal text="Hi! I'm Shreya Singh, a passionate full-stack developer with over a year of experience in creating beautiful, functional websites and applications. My journey started with curiosity about how websites work, and now I'm delivering projects for clients globally." delay={0.1} />
+                  <TextReveal text="Hi! I'm Shreya Singh, a passionate Frontend developer with over a year of experience in creating beautiful, functional websites and applications. My journey started with curiosity about how websites work, and now I'm delivering projects for clients globally." delay={0.1} />
                 </p>
                 <p>
-                  <TextReveal text="I specialize in modern web technologies like React.js, Node.js, and MongoDB. My approach combines technical expertise with a deep understanding of user experience to create solutions that not only work flawlessly but also delight users." delay={0.2} />
+                  <TextReveal text="I specialize in modern web technologies like React.js, Tailwind, and MongoDB. My approach combines technical expertise with a deep understanding of user experience to create solutions that not only work flawlessly but also delight users." delay={0.2} />
                 </p>
                 <p>
                   <TextReveal text="I love solving tough UI challenges and creating joyful digital experiences. When I'm not coding, I'm learning new technologies, contributing to open-source projects, or planning my next exciting project. I believe in continuous learning and staying updated with the latest industry trends." delay={0.3} />
