@@ -1,0 +1,16 @@
+{
+  "name": "Shreya Singh Portfolio",
+  "short_name": "Shreya Singh",
+  "description": "Portfolio of Shreya Singh, frontend developer and freelancer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

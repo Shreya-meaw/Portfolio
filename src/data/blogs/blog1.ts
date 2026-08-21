@@ -2,6 +2,8 @@ import { BlogPost } from "./types";
 
 export const blog1: BlogPost = {
   id: "1",
+  slug: "blog1-deepfake-videos",
+  categorySlug: "cyber",
   title: "Deepfake Videos: How to Detect, Report & Take Legal Action in India (2026 Guide)",
   excerpt: "A single fake video can destroy a reputation within minutes. Learn how to identify deepfakes, collect evidence, report them, and take legal action under Indian cyber laws.",
   date: "2026-01-05",
@@ -9,6 +11,8 @@ export const blog1: BlogPost = {
   category: "Cybersecurity",
   image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop",
   metaDescription: "Complete guide to detecting deepfake videos, reporting to cybercrime.gov.in, and legal action under IT Act 2000, BNS 2023 & DPDPA 2023 in India.",
+  author: { name: "Samrat Bhardwaj", role: "Developer & security writer" },
+  tags: ["deepfakes", "cybersecurity", "india", "privacy"],
   content: `
     <h2>Introduction</h2>
     <p>A single fake video can destroy a reputation, a career, or even a life—within minutes.</p>

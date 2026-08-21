@@ -1,19 +1,24 @@
-// Blog data index - Auto-sorted by date (newest first)
-// To add a new blog: 
-// 1. Create a new file (e.g., blog7.ts) following the BlogPost interface
-// 2. Import and add it to the blogRegistry array below
-// 3. The blog will automatically appear at the correct position based on its date
-
 import { BlogPost } from "./types";
-import { blog1 } from "./blog1";
-import { blog2 } from "./blog2";
+import cyberStyles from "./cyber/cyber.module.css";
+import eventStyles from "./event/event.module.css";
+import journeyStyles from "./journey/journey.module.css";
+import moneyTradingStyles from "./money-trading/money-trading.module.css";
+import personalHobbyStyles from "./personal-hobby/personal-hobby.module.css";
 
+const blogModules = import.meta.glob<BlogPost>("./*/blog*.ts", {
+  eager: true,
+  import: "default",
+});
 
-// Register all blogs here - order doesn't matter, they're auto-sorted by date
-const blogRegistry: BlogPost[] = [
-  blog1,
-  blog2
-];
+const blogRegistry: BlogPost[] = Object.values(blogModules);
+
+export const categories = [
+  { slug: "cyber", name: "Cyber", description: "Security, privacy, and the systems behind a safer web.", styles: cyberStyles },
+  { slug: "event", name: "Events", description: "Notes and takeaways from rooms worth remembering.", styles: eventStyles },
+  { slug: "journey", name: "Journey", description: "Lessons from building, learning, and changing direction.", styles: journeyStyles },
+  { slug: "money-trading", name: "Money & Trading", description: "Personal observations on markets, money, and discipline.", styles: moneyTradingStyles },
+  { slug: "personal-hobby", name: "Personal Hobby", description: "The interests that keep the work human.", styles: personalHobbyStyles },
+] as const;
 
 // Sort blogs by date (newest first) - this runs once on import
 export const allBlogPosts: BlogPost[] = [...blogRegistry].sort(
@@ -28,6 +33,14 @@ export const getRecentPosts = (count: number = 3): BlogPost[] => {
 // Get a single blog post by ID
 export const getBlogById = (id: string): BlogPost | undefined => {
   return allBlogPosts.find((post) => post.id === id);
+};
+
+export const getBlogByPath = (categorySlug: string, slug: string): BlogPost | undefined => {
+  return allBlogPosts.find((post) => post.categorySlug === categorySlug && post.slug === slug);
+};
+
+export const getPostsByCategory = (categorySlug: string): BlogPost[] => {
+  return allBlogPosts.filter((post) => post.categorySlug === categorySlug);
 };
 
 // Create a lookup map for quick access by ID

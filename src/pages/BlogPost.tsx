@@ -6,11 +6,12 @@ import { Link, useParams } from "react-router-dom";
 import Header from "@/components/portfolio/Header";
 import Footer from "@/components/portfolio/Footer";
 import { Helmet } from "react-helmet-async";
-import { getBlogById, BlogPost } from "@/data/blogs";
+import { getBlogByPath, BlogPost } from "@/data/blogs";
+import styles from "./blog-pages.module.css";
 
 const BlogPostPage = () => {
-  const { id } = useParams();
-  const post = getBlogById(id || "");
+  const { category, slug } = useParams();
+  const post = getBlogByPath(category || "", slug || "");
 
   if (!post) {
     return (
@@ -51,7 +52,7 @@ const BlogPostPage = () => {
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://samratbhardwaj.com/blog/${post.id}`
+        "@id": `https://samratbhardwaj.com/blog/${post.categorySlug}/${post.slug}`
       },
       "articleSection": post.category,
       "wordCount": post.content ? post.content.replace(/<[^>]*>/g, '').split(/\s+/).length : 0,
@@ -91,27 +92,27 @@ const BlogPostPage = () => {
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <div className={`min-h-screen ${styles.page}`}>
         <Header />
         
         <main className="pt-20">
           {/* Hero Section */}
-          <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
+          <div className="container mx-auto px-4 pt-10 md:pt-16">
+          <div className={`relative overflow-hidden rounded-2xl ${styles.heroImage}`}>
             <img 
               src={post.image} 
               alt={post.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-            
-            <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-10">
               <div className="container mx-auto">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <span className="bg-primary text-primary-foreground text-sm px-4 py-1 rounded-full font-medium">
+                  <span className="rounded-full bg-white/15 px-4 py-1 text-sm font-semibold backdrop-blur">
                     {post.category}
                   </span>
                   
@@ -119,7 +120,8 @@ const BlogPostPage = () => {
                     {post.title}
                   </h1>
                   
-                  <div className="flex items-center gap-6 text-muted-foreground">
+                  <p className="mb-5 mt-4 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">{post.excerpt}</p>
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-white/75">
                     <div className="flex items-center gap-2">
                       <Calendar size={18} />
                       <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
@@ -133,9 +135,10 @@ const BlogPostPage = () => {
               </div>
             </div>
           </div>
+          </div>
 
           {/* Content */}
-          <article className="container mx-auto px-4 py-16">
+          <article className={`container mx-auto -mt-2 px-4 py-12 md:py-16 ${styles.articleShell}`}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -143,7 +146,10 @@ const BlogPostPage = () => {
               className="max-w-3xl mx-auto"
             >
               <div 
-                className="prose prose-lg dark:prose-invert max-w-none
+                className={post.articleClass}
+                
+              >
+              <div className="prose prose-lg dark:prose-invert max-w-none
                   prose-headings:font-bold prose-headings:text-foreground
                   prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
                   prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
@@ -156,6 +162,23 @@ const BlogPostPage = () => {
                   prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
+
+              <div className="mt-12 flex items-center gap-4 border-t pt-8">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
+                  {post.author.name.charAt(0)}
+                </div>
+                <div>
+                  <p className="font-semibold">{post.author.name}</p>
+                  <p className="text-sm text-muted-foreground">{post.author.role}</p>
+                </div>
+              </div>
+              {post.tags && post.tags.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => <span key={tag} className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">#{tag}</span>)}
+                </div>
+              )}
+
+              </div>
 
               <div className="mt-16 pt-8 border-t">
                 <Link to="/blog">

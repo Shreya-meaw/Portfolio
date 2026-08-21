@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BlogCardSkeleton from "@/components/skeletons/BlogCardSkeleton";
 import { getRecentPosts } from "@/data/blogs";
+import BlogCard from "./BlogCard";
 
 const Blog = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,47 +48,7 @@ const Blog = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Link to={`/blog/${post.id}`}>
-                  <Card className="overflow-hidden hover-lift transition-smooth group cursor-pointer h-full">
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-smooth"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-primary text-primary-foreground text-xs px-3 py-1 rounded-full font-medium">
-                          {post.category}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                        <div className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock size={14} />
-                          <span>{post.readTime}</span>
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h3>
-                      
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                      
-                      <span className="text-sm text-primary font-medium group-hover:underline">
-                        Read More →
-                      </span>
-                    </CardContent>
-                  </Card>
-                </Link>
+                <BlogCard post={post} />
               </motion.div>
             ))
           )}

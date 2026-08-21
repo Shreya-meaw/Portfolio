@@ -9,6 +9,7 @@ export { default as TechStack } from "./TechStack";
 export { default as ProjectHighlights } from "./ProjectHighlights";
 export { default as Projects } from "./Projects";
 export { default as Testimonials } from "./Testimonials";
+export { default as BlogCard } from "./BlogCard";
 
 {/* export { default as Pricing } from "./Pricing"; 
     */}

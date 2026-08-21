@@ -8,6 +8,9 @@ export {
   allBlogPosts, 
   getRecentPosts, 
   getBlogById, 
+  getBlogByPath,
+  getPostsByCategory,
+  categories,
   blogPostsMap,
   type BlogPost 
 } from "./blogs";

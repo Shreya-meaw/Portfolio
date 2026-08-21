@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AllProjects from "./pages/AllProjects";
 import BlogList from "./pages/BlogList";
+import BlogCategory from "./pages/BlogCategory";
 import BlogPost from "./pages/BlogPost";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -33,7 +34,8 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
         <Route path="/all-projects" element={<PageTransition><AllProjects /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><BlogList /></PageTransition>} />
-        <Route path="/blog/:id" element={<PageTransition><BlogPost /></PageTransition>} />
+        <Route path="/blog/:category" element={<PageTransition><BlogCategory /></PageTransition>} />
+        <Route path="/blog/:category/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
         <Route path="/terms-of-service" element={<PageTransition><TermsOfService /></PageTransition>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

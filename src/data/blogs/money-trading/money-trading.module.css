@@ -1,0 +1,3 @@
+.accent { color: #166534; }
+.surface { background: #f3faf5; border-color: #bbf7d0; }
+.article :global(h2) { color: #166534; }

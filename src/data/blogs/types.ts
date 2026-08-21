@@ -1,5 +1,7 @@
 export interface BlogPost {
   id: string;
+  slug: string;
+  categorySlug: string;
   title: string;
   excerpt: string;
   date: string; // ISO date format: YYYY-MM-DD
@@ -8,4 +10,11 @@ export interface BlogPost {
   image: string;
   metaDescription?: string;
   content: string;
+  author: {
+    name: string;
+    role: string;
+    image?: string;
+  };
+  tags?: string[];
+  articleClass?: string;
 }

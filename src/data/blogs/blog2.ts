@@ -2,12 +2,16 @@ import { BlogPost } from "./types";
 
 export const blog2: BlogPost = {
   id: "2",
+  slug: "blog2-secure-coding-fundamentals",
+  categorySlug: "cyber",
   title: "Cybersecurity Fundamentals Every Developer Should Know",
   excerpt: "Understanding basic cybersecurity principles is crucial for modern web development. Explore authentication, encryption, and secure coding practices.",
   date: "2024-03-10",
   readTime: "10 min read",
   category: "Security",
   image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&auto=format&fit=crop",
+  author: { name: "Samrat Bhardwaj", role: "Developer & security writer" },
+  tags: ["secure coding", "web development", "owasp"],
   content: `
     <h2>Why Security Matters</h2>
     <p>In today's digital landscape, cybersecurity is not just an IT concern—it's a fundamental aspect of software development. As developers, we have a responsibility to build secure applications that protect user data and maintain trust.</p>

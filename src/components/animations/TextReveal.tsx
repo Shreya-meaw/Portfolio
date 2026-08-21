@@ -10,7 +10,8 @@ interface TextRevealProps {
 
 export const TextReveal = ({ text, className = '', delay = 0, as = 'span' }: TextRevealProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
+  const Wrapper = as === 'h1' || as === 'h2' || as === 'h3' || as === 'h4' ? 'div' : 'span';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,13 +25,14 @@ export const TextReveal = ({ text, className = '', delay = 0, as = 'span' }: Tex
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const element = ref.current;
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, [isVisible]);
@@ -39,7 +41,7 @@ export const TextReveal = ({ text, className = '', delay = 0, as = 'span' }: Tex
   const Component = motion[as];
 
   return (
-    <div ref={ref} className={className}>
+    <Wrapper ref={ref} className={className}>
       {words.map((word, wordIndex) => (
         <span key={wordIndex} className="inline-block">
           <Component
@@ -57,6 +59,6 @@ export const TextReveal = ({ text, className = '', delay = 0, as = 'span' }: Tex
           {wordIndex < words.length - 1 && <span className="inline-block">&nbsp;</span>}
         </span>
       ))}
-    </div>
+    </Wrapper>
   );
 };
