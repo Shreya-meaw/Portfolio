@@ -4,20 +4,24 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ProjectCardSkeleton from "@/components/skeletons/ProjectCardSkeleton";
 import image3 from "@/assets/image3.jpeg";
 import hack1 from "@/assets/hack1.jpeg";
 import fig1 from "@/assets/fig1.jpeg";
 
-const ProjectHighlights = () => {
-  const [isLoading, setIsLoading] = useState(true);
+interface HighlightProject {
+  title: string;
+  role: string;
+  stack: string[];
+  summary: string;
+  problemSolved: string;
+  image: string;
+  github: string;
+  demo: string;
+  award?: string;
+  company?: string;
+}
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 1200);
-    return () => clearTimeout(timer);
-  }, []);
+const ProjectHighlights = () => {
   const recentProjects = [
     {
        title: "PG Dekho – Zero-Brokerage PG & Rental Discovery Platform",
@@ -53,7 +57,7 @@ const ProjectHighlights = () => {
     }
   ];
 
-  const ProjectCard = ({ project }: { project: any }) => (
+  const ProjectCard = ({ project }: { project: HighlightProject }) => (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -66,6 +70,10 @@ const ProjectHighlights = () => {
           <img 
             src={project.image} 
             alt={`${project.title} - ${project.role} project using ${project.stack.join(', ')}`}
+            width={1200}
+            height={675}
+            loading="lazy"
+            decoding="async"
             className="w-full h-48 object-cover group-hover:scale-110 transition-all duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -182,17 +190,9 @@ const ProjectHighlights = () => {
           </motion.header>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {isLoading ? (
-              <>
-                <ProjectCardSkeleton />
-                <ProjectCardSkeleton />
-                <ProjectCardSkeleton />
-              </>
-            ) : (
-              recentProjects.map((project) => (
-                <ProjectCard key={project.title} project={project} />
-              ))
-            )}
+            {recentProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
           </div>
 
           <div className="flex justify-center">

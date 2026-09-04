@@ -3,8 +3,7 @@ import { ExternalLink, Github, Code, Award, Briefcase } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState, useEffect } from "react";
-import ProjectCardSkeleton from "@/components/skeletons/ProjectCardSkeleton";
+import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { trackProjectClick, trackFilterChange } from "@/lib/analytics";
 
@@ -19,15 +18,22 @@ import fig1 from "@/assets/fig1.jpeg";
 import fig2 from "@/assets/fig2.jpeg";
 import fig3 from "@/assets/fig3.jpeg";
 
-const Projects = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+interface Project {
+  title: string;
+  role: string;
+  stack: string[];
+  summary: string;
+  problemSolved: string;
+  image: string;
+  github: string;
+  demo: string;
+  category: string;
+  award?: string;
+  company?: string;
+}
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   const figmaProjects = [
     {
       title: "PG Dekho – Zero-Brokerage PG & Rental Discovery Platform",
@@ -150,7 +156,7 @@ const Projects = () => {
     ? allProjects 
     : allProjects.filter(project => project.category === activeFilter);
 
-  const ProjectCard = ({ project, category }: { project: any, category: string }) => (
+  const ProjectCard = ({ project }: { project: Project }) => (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -162,6 +168,10 @@ const Projects = () => {
           <motion.img 
             src={project.image} 
             alt={project.title}
+            width={1200}
+            height={675}
+            loading="lazy"
+            decoding="async"
             className="w-full h-48 object-cover"
             whileHover={{ scale: 1.08 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -322,28 +332,19 @@ const Projects = () => {
 
         {/* Filtered Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {isLoading ? (
-            <>
-              <ProjectCardSkeleton />
-              <ProjectCardSkeleton />
-              <ProjectCardSkeleton />
-              <ProjectCardSkeleton />
-            </>
-          ) : (
-            <AnimatePresence mode="wait">
-              {filteredProjects.map((project) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ProjectCard project={project} category={project.category} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          )}
+          <AnimatePresence mode="wait">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ProjectCard project={project} category={project.category} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

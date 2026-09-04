@@ -1,13 +1,29 @@
+import { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download, MessageCircle, Github, Linkedin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Spline from '@splinetool/react-spline';
 import { useParallax } from "@/hooks/use-parallax";
 import { TextReveal } from "@/components/animations/TextReveal";
 
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const Hero = () => {
   const parallaxOffset = useParallax(0.3);
+  const [shouldLoadSpline, setShouldLoadSpline] = useState(false);
+  const [isSplineReady, setIsSplineReady] = useState(false);
+
+  useEffect(() => {
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
+    const loadSpline = () => setShouldLoadSpline(true);
+    const idleId = window.requestIdleCallback?.(loadSpline, { timeout: 2500 });
+    const timeoutId = window.setTimeout(loadSpline, 2500);
+
+    return () => {
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
   
   return (
     <>
@@ -17,12 +33,22 @@ const Hero = () => {
   className="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-background via-background to-primary-muted/10"
 >
 {/* Spline Background with Parallax (only visible on md and above) */}
-<div 
-  className="hidden md:block absolute inset-0 z-0 pointer-events-auto overflow-hidden"
+<div
+  className={`hidden md:block absolute inset-0 z-0 pointer-events-auto overflow-hidden transition-opacity duration-700 ${isSplineReady ? "opacity-100" : "opacity-0"}`}
   style={{ transform: `translateY(${parallaxOffset}px)` }}
 >
   <div className="w-full h-full scale-[1.20] translate-x-[50px]">
-    <Spline scene="https://prod.spline.design/hZIuJ3e8IciqiLrP/scene.splinecode" />
+    {shouldLoadSpline && (
+      <Suspense fallback={<div className="h-full w-full" aria-hidden="true" />}>
+        <Spline
+          scene="https://prod.spline.design/hZIuJ3e8IciqiLrP/scene.splinecode"
+          onLoad={() => {
+            setIsSplineReady(true);
+            window.dispatchEvent(new Event("portfolio:spline-ready"));
+          }}
+        />
+      </Suspense>
+    )}
   </div>
 </div>
 
@@ -61,7 +87,7 @@ const Hero = () => {
     <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
   <motion.div
-    initial={{ opacity: 0, x: -50 }}
+    initial={{ opacity: 1, x: -50 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
     style={{ transform: `translateY(${-parallaxOffset * 0.2}px)` }}
@@ -70,7 +96,7 @@ const Hero = () => {
     itemType="https://schema.org/Person"
   >
   <motion.h1
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 1, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.2, duration: 0.8 }}
     className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"

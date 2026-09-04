@@ -150,6 +150,10 @@ const Testimonials = () => {
                       <img
                         src={currentTestimonial.avatar}
                         alt={`${currentTestimonial.name} - ${currentTestimonial.role} at ${currentTestimonial.company}`}
+                        width={64}
+                        height={64}
+                        loading="lazy"
+                        decoding="async"
                         className="w-16 h-16 rounded-full object-cover"
                       />
                       <div>
@@ -172,6 +176,7 @@ const Testimonials = () => {
                 size="icon"
                 onClick={prevTestimonial}
                 className="rounded-full hover-scale"
+                aria-label="Previous testimonial"
               >
                 <ChevronLeft size={20} />
               </Button>
@@ -181,6 +186,8 @@ const Testimonials = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
+                    aria-label={`Show testimonial ${index + 1}`}
+                    aria-current={index === currentIndex ? "true" : undefined}
                     className={`w-3 h-3 rounded-full transition-smooth ${
                       index === currentIndex ? "bg-primary" : "bg-muted"
                     }`}
@@ -193,6 +200,7 @@ const Testimonials = () => {
                 size="icon"
                 onClick={nextTestimonial}
                 className="rounded-full hover-scale"
+                aria-label="Next testimonial"
               >
                 <ChevronRight size={20} />
               </Button>

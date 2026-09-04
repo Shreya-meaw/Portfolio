@@ -29,14 +29,13 @@ import Contact from "@/components/portfolio/Contact";
 import Stats from "@/components/portfolio/Stats";
 import Footer from "@/components/portfolio/Footer";
 import Blog from "@/components/portfolio/Blog";
-import { FloatingContactButton } from "@/components/common";
 
 const Index = () => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       <motion.div 
         className="min-h-screen bg-background"
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
@@ -68,7 +67,6 @@ const Index = () => {
           <Contact />
         </main>
         <Footer />
-        <FloatingContactButton />
       </motion.div>
     </ThemeProvider>
   );

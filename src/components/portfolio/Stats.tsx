@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Briefcase, Users, Star, Calendar } from "lucide-react";
+import { Briefcase, Star, Calendar } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Lottie from "lottie-react";
 import catMovement from "@/assets/lottie/Cat Movement.json";
@@ -7,7 +8,7 @@ import { useCounterAnimation } from "@/hooks/use-counter-animation";
 
 const StatCard = ({ stat, index }: {
   stat: {
-    icon: any;
+    icon: LucideIcon;
     title: string;
     target: number;
     suffix: string;

@@ -16,6 +16,10 @@ const BlogCard = ({ post, accentClass = "text-primary" }: BlogCardProps) => (
         <img
           src={post.image}
           alt={post.title}
+          width={1200}
+          height={750}
+          loading="lazy"
+          decoding="async"
           className={`h-full w-full object-cover ${styles.image}`}
         />
         <span className={`absolute left-4 top-4 rounded-full border border-background/40 bg-background/90 px-3 py-1 text-xs font-semibold ${accentClass}`}>

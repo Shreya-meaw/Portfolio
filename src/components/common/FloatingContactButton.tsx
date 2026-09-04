@@ -83,6 +83,7 @@ const FloatingContactButton = () => {
           onClick={() => setIsOpen(true)}
           className="h-14 w-14 rounded-full shadow-xl bg-primary hover:bg-primary/90 transition-all duration-300"
           size="icon"
+          aria-label="Open quick contact form"
         >
           <Mail className="h-6 w-6" />
         </Button>
